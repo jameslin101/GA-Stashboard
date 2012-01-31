@@ -2,6 +2,7 @@ Activerecord::Application.routes.draw do
   get "pages/home"
 
   get "pages/status"
+  resources :users
 
   match '/', :to =>'pages#home'
   # The priority is based upon order of creation:
