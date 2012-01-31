@@ -1,2 +1,7 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+<%#= unless current_user.services.empty? %>
+	<% current_user.services.each do |s| %>
+	 	<%= s.name %><p>
+	<% end %>
+	<%#= current_user.services.count %>	
