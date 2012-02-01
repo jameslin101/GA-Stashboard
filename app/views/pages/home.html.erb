@@ -1,11 +1,49 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%#= unless current_user.services.empty? %>
-	<% current_user.services.each do |s| %>
-	 	<%= s.name %> <br>
-		<% s.statuses.each do |t| %>
-			<%= t.message %> 
+<body><p>
+<%= image_tag "logo.png", {:height => "40px"} %>
+<h2>Stashboard</h2>
+<%#= unless current_user.services.empty %>
+<table cellpadding="10">
+	<thead>
+	<tr>
+		<% t = Array.new %>
+		<% t[0] = Time.current() %>
+		<% for i in 1..5 %>
+			<% t[i] = t[i-1].yesterday %>
 		<% end %>
-		<p>
+		<th>Service</th>
+		<th>Current</th>
+		<% for i in 1..5 %>
+			<th><%= t[i].strftime("%b. %d") %></th>
+		<% end %>
+	</tr>
+	</thead>
+	<tr>
+	<% current_user.services.each do |s| %>	
+	<td>
+	<%= link_to s.name, service_path(s) %> 
+	</td>
+		<% q = s.statuses %>
+		<% if !q.empty? %>
+			<% f = q.last.etime %>
+			<% tt = Array.new %>
+			<% for i in [5,4,3,2,1,0] %>
+				<% tt[i] = q.where(:etime => f..t[i].end_of_day).first.stat%>
+				<td>
+				<% if tt[i] == 0 %>
+				<%= image_tag("cross-circle.png")%>
+				<% elsif tt[i] == 1 %>
+				<%= image_tag("tick-circle.png")%>
+				<% elsif tt[i] == 2 %>
+				<%= image_tag("exclamation.png")%>
+				<% elsif tt[i] == 3 %>
+				<%= image_tag("information.png")%>
+				<% end %>
+				</td>			
+				<% end %>
+		<% end %>
+		<td><%#=tt0.stat %></td>
+		
+	</tr>
 	<% end %>
 	<%#= current_user.services.count %>	
+</body>

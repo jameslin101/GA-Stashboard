@@ -1,0 +1,28 @@
+<h1><%= @service.name %></h1>
+<table cellpadding="10">
+	<thead>
+	<tr>
+		<th>Time</th>
+		<th>Status</th>
+		<th>Message</th>
+	</tr>
+	</thead>
+<% @service.statuses.each do |t| %>
+
+	<tr>
+		<td><%= time_ago_in_words(t.etime) %></td>
+		<td><% if t.stat == 0 %>
+		<%= image_tag("cross-circle.png")%>
+		<% elsif t.stat == 1 %>
+		<%= image_tag("tick-circle.png")%>
+		<% elsif t.stat == 2 %>
+		<%= image_tag("exclamation.png")%>
+		<% elsif t.stat == 3 %>
+		<%= image_tag("information.png")%>
+		<% end %>
+		
+		</td>
+		<td><%= t.message %></td>
+	</tr>
+<% end %>
+</table>
