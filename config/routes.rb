@@ -1,10 +1,10 @@
 Activerecord::Application.routes.draw do
-  get "pages/home"
 
-  get "pages/status"
-  resources :service, :controller => "pages"
-
-  match '/', :to =>'pages#home'
+  resources :service do
+    resources :status 
+  end
+    
+  match '/', :to =>'service#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

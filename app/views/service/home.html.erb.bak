@@ -1,4 +1,7 @@
-<body><p>
+%body
+  %div#wrapper
+    %header
+      %div
 <%= image_tag "logo.png", {:height => "40px"} %>
 <h2>Stashboard</h2>
 <%#= unless current_user.services.empty %>
@@ -28,6 +31,7 @@
 			<% tt = Array.new %>
 			<% for i in [5,4,3,2,1,0] %>
 				<% tt[i] = q.where(:etime => f..t[i].end_of_day).first.stat%>
+				<% puts t[i].end_of_day%>
 				<td>
 				<% if tt[i] == 0 %>
 				<%= image_tag("cross-circle.png")%>

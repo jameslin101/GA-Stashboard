@@ -17,6 +17,19 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem "fabrication"
+gem "database_cleaner"
+gem "ffaker"
+gem 'compass'
+gem 'haml'
+
+group :test do
+  gem "rspec", "~> 2.7"
+  gem "rspec-rails", "~> 2.7"
+  gem "rspec-core", "~> 2.7"
+  gem "rspec-expectations", "~> 2.7"
+  gem "rspec-mocks", "~> 2.7"
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

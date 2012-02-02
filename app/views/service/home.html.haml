@@ -1,0 +1,50 @@
+%body
+  %section#content
+    %table.data#services
+      %thead
+        %tr
+          -t = Array.new
+          -t[0] = Time.current()
+          -for i in 1..5
+            -t[i] = t[i-1].yesterday
+          %th Service
+          %th.today Current
+          -for i in 1..5
+            %th 
+              =t[i].strftime("%b. %d")
+      %tbody
+        -current_user.services.each do |s|
+          %tr#account-portal
+            %td
+              =link_to s.name, service_path(s)
+            -q = s.statuses
+            -if !q.empty?
+              -f = q.last.etime
+              -tt = Array.new
+              -for i in [5,4,3,2,1,0]
+                -sym = q.where(:etime => f..t[i].end_of_day).first.stat
+                %td.status
+                  -if sym == 0
+                    = image_tag("cross-circle.png")
+                  -elsif sym == 1
+                    = image_tag("tick-circle.png")
+                  -elsif sym == 2
+                    = image_tag("exclamation.png")
+                  -elsif sym == 3
+                    = image_tag("information.png")
+                  /-render :partial => "symbols", :locals => {:sym => @sym}
+    #legend
+      %h4 
+        Status Legend
+        %ul
+          %li
+            %img#sym(src="assets/cross-circle.png")
+            %p The service is currently down
+          %li
+            %img#sym(src="assets/tick-circle.png")
+            %p The service is up
+          %li
+            %img#sym(src="assets/exclamation.png")
+            %p The service is up
+          
+

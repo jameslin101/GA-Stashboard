@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class ServiceController < ApplicationController
 
   def show
     @service = current_user.services.find(params[:id])
