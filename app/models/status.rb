@@ -2,7 +2,7 @@ class Status < ActiveRecord::Base
   
   belongs_to :service
   
-  attr_accessible :etime, :stat, :message
+  attr_accessible :time, :state, :message
   
-  validates_presence_of :etime, :stat, :message, :service_id
+  validates_presence_of :time, :state, :message, :service_id
 end

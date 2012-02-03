@@ -19,20 +19,12 @@
               =link_to s.name, service_path(s)
             -q = s.statuses
             -if !q.empty?
-              -f = q.last.etime
+              -f = q.last.time
               -tt = Array.new
               -for i in [5,4,3,2,1,0]
-                -sym = q.where(:etime => f..t[i].end_of_day).first.stat
+                -sym = q.where(:time => f..t[i].end_of_day).first.state
                 %td.status
-                  -if sym == 0
-                    = image_tag("cross-circle.png")
-                  -elsif sym == 1
-                    = image_tag("tick-circle.png")
-                  -elsif sym == 2
-                    = image_tag("exclamation.png")
-                  -elsif sym == 3
-                    = image_tag("information.png")
-                  /-render :partial => "symbols", :locals => {:sym => @sym}
+                  = render :partial => "symbols", :locals => {:sym => sym}
     #legend
       %h4 
         Status Legend

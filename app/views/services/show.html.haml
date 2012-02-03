@@ -1,0 +1,27 @@
+%section#content
+  %h2 
+    =@service.name
+  %p#serviceDescription 
+    =@service.desc
+  %table#events.data{:cellpadding=>"10"}
+    %thead
+      %tr
+        %th.time-header Time
+        %th.status-header Status
+        %th.status-header Message
+    -@service.statuses.each do |t|
+      -sym = t.state
+      %tr
+        %td
+          =time_ago_in_words(t.time)
+        %td
+          -if sym == 0
+            = image_tag("cross-circle.png")
+          -elsif sym == 1
+            = image_tag("tick-circle.png")
+          -elsif sym == 2
+            = image_tag("exclamation.png")
+          -elsif sym == 3
+            = image_tag("information.png")
+        %td
+          =t.message

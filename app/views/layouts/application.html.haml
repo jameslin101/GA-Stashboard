@@ -8,17 +8,21 @@
     /[if lt IE 8]
       /= stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
     = csrf_meta_tag
-    - if signed_in?
-      = current_user.email
-      = link_to "Sign out", sign_out_path, :method => :delete
-    - else 
-      = link_to "Sign in", sign_in_path
-    %div#wrapper
-      %header
-        %div.actions.button-container
-          %a.button.pill.big Report an Issue 
-        %img#logo(src="assets/logo.png" alt="Logo")
-        %a(href="/")
-          %h1.title Stashboard
-      = yield
+    %body
+      %div#wrapper
+        %header
+          .span-1.append-3
+            %p
+              - if signed_in?
+                = current_user.email
+                | 
+                = link_to "Sign out", sign_out_path, :method => :delete
+              - else 
+                = link_to "Sign in", sign_in_path
+          %div.actions.button-container
+            %a.button.pill.big Report an Issue 
+          %img#logo(src="/assets/logo.png" alt="Logo")
+          %a(href="/")
+            %h1.title Stashboard
+        = yield
 

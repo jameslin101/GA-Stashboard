@@ -11,20 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131193258) do
+ActiveRecord::Schema.define(:version => 20120203012522) do
 
   create_table "services", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "desc"
   end
 
   add_index "services", ["user_id"], :name => "index_services_on_user_id"
 
   create_table "statuses", :force => true do |t|
-    t.datetime "etime"
-    t.integer  "stat"
+    t.datetime "time"
+    t.string   "state"
     t.string   "message"
     t.integer  "service_id"
     t.datetime "created_at"
