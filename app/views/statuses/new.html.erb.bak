@@ -1,0 +1,11 @@
+<%= form_for [@service, @status], :url =>service_statuses_path(@service, @status) do |f|%>
+  <%= f.label :status %>
+  <%= f.text_field :state %><br />
+
+  <%= f.label :message %>:
+  <%= f.text_field :message %><br />
+
+  <%= f.label :time%>
+  <%= f.datetime_select :time%> <br />
+  <%= f.submit %>
+<% end %>

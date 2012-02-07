@@ -1,0 +1,25 @@
+%section#content
+  = form_for [@service, @status] do |f|
+    %p
+      = f.label "Status:" 
+      %br 
+      = f.radio_button :state, "up"
+      = f.label "The service is up." 
+      %br
+      = f.radio_button :state, "down"
+      = f.label "The service is down." 
+      %br
+      = f.radio_button :state, "info"
+      = f.label "Provide information." 
+      %br
+      = f.radio_button :state, "problem"
+      = f.label "The service is experiencing intermittent problems." 
+      %br
+      /= f.text_field :state
+    %p
+      = f.label "Message:"
+      = f.text_field :message
+    %p
+      = f.label "Time:"
+      = f.datetime_select :time
+    = f.submit
