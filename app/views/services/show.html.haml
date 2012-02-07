@@ -1,8 +1,17 @@
 %section#content
+  - if flash[:notice]
+    %p.notice
+    = flash[:notice]
+  - if flash[:error]
+    %p.error
+    = flash[:error]
   %h2 
     =@service.name
   %p#serviceDescription 
     =@service.desc
+  %p
+    %br
+    =link_to "[Add status]", new_service_status_path(@service)    
   %table#events.data{:cellpadding=>"10"}
     %thead
       %tr
@@ -13,15 +22,9 @@
       -sym = t.state
       %tr
         %td
-          =time_ago_in_words(t.time)
+          /=time_ago_in_words(t.time)
+          =link_to time_ago_in_words(t.time), edit_service_status_path(@service,t)    
         %td
-          -if sym == 0
-            = image_tag("cross-circle.png")
-          -elsif sym == 1
-            = image_tag("tick-circle.png")
-          -elsif sym == 2
-            = image_tag("exclamation.png")
-          -elsif sym == 3
-            = image_tag("information.png")
+          = render :partial => "symbols", :locals => {:sym => sym}
         %td
           =t.message

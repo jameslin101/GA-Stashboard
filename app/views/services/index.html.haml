@@ -1,5 +1,11 @@
 %body
   %section#content
+    - if flash[:notice]
+      %p.notice
+      = flash[:notice]
+    - if flash[:error]
+      %p.error
+      = flash[:error]
     %table.data#services
       %thead
         %tr
@@ -20,9 +26,15 @@
             -q = s.statuses
             -if !q.empty?
               -f = q.last.time
+              =puts s.name + " aaaaaaa "+ f.to_s + " " + q.last.time.to_s
               -tt = Array.new
-              -for i in [5,4,3,2,1,0]
-                -sym = q.where(:time => f..t[i].end_of_day).first.state
+              -for i in [0,1,2,3,4,5]
+                -querysym = q.where(:time => f..t[i].end_of_day).first
+                -if !querysym.nil?
+                  -sym=querysym.state
+                -else
+                  -sym="N/A"
+                =puts "********** " + sym + " " + t[i].to_s
                 %td.status
                   = render :partial => "symbols", :locals => {:sym => sym}
     #legend
@@ -37,6 +49,6 @@
             %p The service is up
           %li
             %img#sym(src="assets/exclamation.png")
-            %p The service is up
+            %p The service is experiencing intermittent problems
           
 

@@ -1,9 +1,11 @@
 Activerecord::Application.routes.draw do
 
-  resources :services 
-  
+  resources :services do
+    resources :statuses
+  end
+    
   match '/', :to =>'services#index'
-  
+  match '/sign_out', :to => 'clearance/sessions#destroy'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
